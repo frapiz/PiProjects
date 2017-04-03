@@ -1,5 +1,5 @@
 var authorized_users = [
-  11111111,
+  111111, //replace with your id
 ];
 
 // Include required libraries
@@ -25,7 +25,7 @@ var fs = require('fs');
 		
 // Initialize and start Telegram BOT (insert your real token)
 var bot = new Bot({
-  token: '#######MY_TOKEN#######'
+  token: '####MYTOKEN####' //replace with your token
 });
 
 // Attach event on every received message 
@@ -40,23 +40,27 @@ console.log("BOT ready!");
 
 // Function that handles a new message
 function echo(message) {
-  // if(!isAuthorized(message.from.id)) 
-  //	   return;
-  
-  bot.sendMessage({
-	  chat_id: message.chat.id,
-	  text: 'User ID ' + message.from.id + ' says "' + message.text + '"',
-  });
-  
-  setTimeout(function() {
-    bot.sendPhoto({
-    chat_id : message.chat.id,
-    caption: 'test image',
-	files: {
-			 photo: 'currentPhoto.jpg'   
-    }
-});
-}, 2000);
+   if(!isAuthorized(message.from.id)) 
+	   return;
+   
+    var date = new Date()+"";
+   switch(message.text){	  
+	 case "/photo":    
+	    bot.sendPhoto({
+        chat_id : message.chat.id,
+        caption: date,
+	    files: {
+			 photo: '/home/pi/Desktop/bot/currentPhoto.jpg'   
+       }
+      });
+	  break;
+	  case "/video":
+	  
+	   
+   }
+ 
+   
+
 }
 
 
